@@ -12,9 +12,13 @@
 
 2. Per-base NT distribution
     1. Use markdown to insert your 4 histograms here.
+    ``` read_1```
     ![read_1](https://github.com/phampe/demultiplex/blob/6c11b78d686ca89b9a38de6d49f33664b98bdb45/Assignment-the-first/read_1.png)
+    ```read_2```
     ![read_2](https://github.com/phampe/demultiplex/blob/6c11b78d686ca89b9a38de6d49f33664b98bdb45/Assignment-the-first/read_2.png)
+    ```index_1```
     ![index_1](https://github.com/phampe/demultiplex/blob/6c11b78d686ca89b9a38de6d49f33664b98bdb45/Assignment-the-first/index_1.png)
+    ```index_2```
     ![index_2](https://github.com/phampe/demultiplex/blob/6c11b78d686ca89b9a38de6d49f33664b98bdb45/Assignment-the-first/index_2.png)
 
 
