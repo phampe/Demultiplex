@@ -36,7 +36,23 @@ Dictionary of counts for each index matched, unmatched and unknown
 Dictonary set up to read how many times barcode got matched to incorrect barcode and what that barcode was
     need to figure this out
 #####################################################################################################################################################################
+Functions:
 
+one to write the reverse complementary 
+def reverse_complement:
+    its going to take in the index from our first read
+    write out the complement to it
+    then it will output the reverse and return it to us in a list
+
+We need another function to take the permutation of our indexes and create a file from it
+    permutation of set of indexes with set of complementary indexes
+    return values and output these as files
+
+The fucntion is the phred score function
+    takes the phred score and calculate the score
+    return the score
+
+#####################################################################################################################################################################
 These are going to be one big loop and a bunch of if statements that run though the funciton
 for ease of reading the variables used for the files will be r1, r2, i1 and i2 since it won't come up as often
 the variable we will be using for the indexes is index_1 and index_2
