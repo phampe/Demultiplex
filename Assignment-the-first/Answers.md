@@ -32,7 +32,7 @@
        With the best score being 40, we have some averages of 30 which based on the distrubition of are averages are bad. 
        With relationship to our read scores as there are a ton of scores that are nearing 40 I would say we could accept any of the data that is above 
        the averages at their respective positions. These are less of an issue to have a bad score on as we are just lining them up with our genomic template,
-       but I do still want them to be above average scores.
+       but I do still want them to be above average scores. So for this I would set them to be above 30.
 
 
     3. zcat 1294_S1_L008_R2_001.fastq.gz |grep -A1 "^@"| grep -v
