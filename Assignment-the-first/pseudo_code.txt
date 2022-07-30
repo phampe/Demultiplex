@@ -1,0 +1,125 @@
+``` this line of code is for demultiplexing out our read data```
+
+Make an argparse so we can select our files and cutoff for our qscore
+    threshold for qscore is based off of the average graph plots
+    we want higher accuracy when we are looking at indexes
+
+input files
+    read 1
+    read 2
+    index 1 
+    index 2
+
+output files 
+    matched read_1 for the 24 indexes
+    matched read_2 for the 24 indexes
+        this will total 48 good files
+            create a funciton to make all these files and open them
+
+   unmatched read_1
+   unmatched read_2
+
+   unknown read_1
+   unknown read_2
+
+list of sequences from file given by leslie
+    put this into a set
+
+write a code for the reverse complementary sequences
+complementary sequences 
+    put this into a set
+
+dictionary of sequences as keys and and reverse complements as values from our set
+
+Dictionary of counts for each index matched, unmatched and unknown
+
+Dictonary set up to read how many times barcode got matched to incorrect barcode and what that barcode was
+    need to figure this out
+#####################################################################################################################################################################
+
+These are going to be one big loop and a bunch of if statements that run though the funciton
+for ease of reading the variables used for the files will be r1, r2, i1 and i2 since it won't come up as often
+the variable we will be using for the indexes is index_1 and index_2
+qscore will be the value of the given position in the read
+threshold_qscore will be the value we give
+Dicitonaries will be
+    events_occured (for the count of each occurances)
+    dual_matching (for checking to see if the indexes are matched with their reverse complementary)
+    incorrect_barcodes  (for those that have index hopping)
+Sets will be   
+    barcodes
+    complementary_barcodes
+
+#####################################################################################################################################################################
+
+First we would need to open all the files (4) so that they are running in parallel as well as the output files so that we don't have to do it anywhere else
+
+### everything below here will be looped through
+
+We now need to read index_1 and match it with our set of known indexes
+
+### First we are going to go through the the sequence rather than the individual bases
+
+   if index_1 does not exist we put it in the unknown
+      grab the corresponding index_2 and concatenate 
+      add the index to the header of our read_1 and read_2, then put them into unknown read_1 and read_2
+         put a counter on the unknown
+
+### for this we are going to go through each of the nucleotide for index_1
+
+### leslie said to put this higher up check the n's first#####################################################
+   if there is a N for nucleotide we immeidately put the files into unknown
+      grab the corresponding index_2 and concatenate
+      add the index to the header of our read_1 and read_2, then put them into unknown read_1 and read_2
+         put a counter on the unknown
+
+   if the quality score is too low on any of the bases then we skip and put in the unknown
+      grab the corresponding index_2 and concatenate
+      add the index to the header of our read_1 and read_2, then put them into unknown read_1 and read_2
+         put counter on the unknown
+
+######################################################################################################################################################################
+### for this we are looking through the sequence for index_2
+
+   if it matches what we have in our set we go onto the index_2
+
+        If there is a N immeidately toss in unknown
+            with r1, r2 and indexes
+            add counter to unknown
+
+        if the index in index_2 is the correlated with the value in the dictionary for index_1 ( as they are matched)
+            now we check to see if it meets the threshold for our quality scores
+      
+            if it meets our standards then we concatenate the files and add the index pair to the header
+               add the file to our matched
+               add counter for matched
+
+            if it doesn't then we put it into our unknown
+               add the file to our unknown
+               add counter for unknown
+      
+      if the two indexes don't match
+         check to see if it is a possible complementary from another index
+            if it is we check the quality score 
+               if it is over the threshold 
+                  add files to unmatched
+                  add counter to unmatched
+                  
+               if it doesn't reach our threshold
+                  add files to unknown
+                  add counter to unknown
+            
+            if it isn't an index that we know in our set
+                move to unknown 
+                add counter to unknown
+
+      anything else
+         we add it to files to unknown
+         add counter to unknown
+      
+Close all our files at the end
+
+report counts for how many we have for each file
+how many of each bases we had swapped and where it swapped
+
+iter-tools dictionary

@@ -1,0 +1,89 @@
+7/26:
+First day of working on demultiplexing.
+
+Assignment the first - part 1
+
+bash command to do exploratory
+
+srun --account=bgmp --partition=bgmp --nodes=1 --ntasks-per-node=1 --time=2:00:00 --cpus-per-task=2 --pty bash
+    this is used so that we can explore the file and not use the nodes which is bad
+    It will tell you which node you are using in the name
+    make sure that they are reverse complements
+
+zcat 1294_S1_L008_R1_001.fastq.gz |wc -l
+    1452986940 lines
+        363246735 reads
+
+zcat 1294_S1_L008_R2_001.fastq.gz |wc -l
+    1452986940 lines   
+        363246735 reads
+
+zcat 1294_S1_L008_R3_001.fastq.gz |wc -l
+    1452986940 lines
+        363246735 reads
+
+zcat 1294_S1_L008_R4_001.fastq.gz |wc -l
+    1452986940 lines
+        363246735 reads
+
+###########################################################################################################################################################
+7/27:
+zcat 1294_S1_L008_R1_001.fastq.gz |head -2 |tail -1|wc
+    this is read files
+    determines that it is 101 length
+
+zcat 1294_S1_L008_R2_001.fastq.gz |head -2 |tail -1|wc
+    this is a index file
+    it is 8 in length
+
+Started going through the code and adding funcitions to make argparses. There was an error where I didn't call argparse which caused an error. Feeling good
+Added command to create list as well as go through file to get lines and scores. This was done similarly to PS4. I went through troubleshooting and making 
+sure the code worked as i went though each part. 
+
+make sure to install matplot lib in your working directory using
+conda install matplotlib
+
+#############################################################################################################################################
+#!/bin/bash
+
+#SBATCH --account=bgmp                 ### change this to your actual account for charging
+#SBATCH --partition=bgmp               ### queue to submit to
+#SBATCH --job-name=Neverland           ### job name
+#SBATCH --output=peter_output_%j.out   ### file in which to store job stdout. j holds the job id
+#SBATCH --error=hostname_%j.err        ### file in which to store job stderr
+#SBATCH --time=0-09:00:00              ### wall-clock time limit, in minutes
+#SBATCH --nodes=1                      ### number of nodes to use
+#SBATCH --cpus-per-task=8              ### number of cores for each task
+
+
+
+python first_part1.py -f "/projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz" -l 101 -o "read_1"
+
+for our bash commands we are using for finding all the N in the indexes
+
+zcat 1294_S1_L008_R2_001.fastq.gz |grep -A1 "^@"| grep -v "^--"| grep -v "^@"|grep "N"|wc -l
+    This will get you your total count of indexes that have a N in it. 
+
+I got the code working. Now i have my graphs for the indexes
+
+I have now started writing my pseudo code
+
+#############################################################################################################################################
+7/28
+
+Started writing out my pseudo code. It feels fairly straight forward but I am doing this before barcode
+
+
+#############################################################################################################################################
+7/29
+
+Worked on finishing pseudo code and now am making test files to work from
+test files are as follow for what they should be doing
+
+first read should be matched and accepted
+second read should be matched but index_2 will not meet threshold score
+third read is a index hopping
+fourth read is N so it should immeidately get ruled out
+fifth read is N in index 2
+sixth one is unmatched but low threshold on the second
+
