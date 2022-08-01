@@ -12,6 +12,18 @@
 
 2. Per-base NT distribution
     1. Use markdown to insert your 4 histograms here.
+    
+    ``` read_1```
+    ![read_1](https://github.com/phampe/demultiplex/blob/6c11b78d686ca89b9a38de6d49f33664b98bdb45/Assignment-the-first/read_1.png)
+    
+    ```read_2```
+    ![read_2](https://github.com/phampe/demultiplex/blob/6c11b78d686ca89b9a38de6d49f33664b98bdb45/Assignment-the-first/read_2.png)
+    
+    ```index_1```
+    ![index_1](https://github.com/phampe/demultiplex/blob/6c11b78d686ca89b9a38de6d49f33664b98bdb45/Assignment-the-first/index_1.png)
+    
+    ```index_2```
+    ![index_2](https://github.com/phampe/demultiplex/blob/6c11b78d686ca89b9a38de6d49f33664b98bdb45/Assignment-the-first/index_2.png)
 
 
     2. We care about our indexes more than our biological data. There are less indexes which means less room for error. If there is more room
@@ -20,7 +32,7 @@
        With the best score being 40, we have some averages of 30 which based on the distrubition of are averages are bad. 
        With relationship to our read scores as there are a ton of scores that are nearing 40 I would say we could accept any of the data that is above 
        the averages at their respective positions. These are less of an issue to have a bad score on as we are just lining them up with our genomic template,
-       but I do still want them to be above average scores.
+       but I do still want them to be above average scores. So for this I would set them to be above 30.
 
 
     3. zcat 1294_S1_L008_R2_001.fastq.gz |grep -A1 "^@"| grep -v
@@ -52,7 +64,7 @@
 4. Pseudocode
 
 ### There is more written on the actual psuedo_code.txt file
-###
+
 Make an argparse so we can select our files and cutoff for our qscore
 
 input files
