@@ -87,3 +87,67 @@ fourth read is N so it should immeidately get ruled out
 fifth read is N in index 2
 sixth one is unmatched but low threshold on the second
 
+I have now created all the output files
+
+##############################################################################################################################################
+7/30
+
+went through pseudo code with matt before we have to turn it in. 
+
+##############################################################################################################################################
+8/3
+started working on demultiplexing assignment. Manage to go through with help to get out all indexes that we are going to be using for demultiplexing
+I got through a ton of the set up and made some good progress on the code. There are still some spots lefts that i need to work on outside of that everything is going well
+Jason help me through the code of how to get each file read at teh same time and stored. There is now issues with my files printing. I am trying to figure it out. 
+
+
+./demultiplexing.py -ic 35 -rc 35 -o r1_test.fq -t r2_test.fq -r r3_test.fq -f r4_test.fq
+Use this to make it quicker
+
+wrote out half of my if statements to run. Haven't fully error corrected them yet, just setting up a layout for 
+the future writing
+
+##############################################################################################################################################
+8/4
+
+today was a full force work of coding. The other day i made it all the way to writing out the if statements to get a sense of what needs to be written.
+spent all day in class today writing out the rest of the functions. As of 8:17pm the files have been running on the slurm script 
+for about 30 min. All the test files have worked. I have gone through and written down notes for each step of 
+the program and what it does. There might need to be some troubleshooting but the program needs to run for at least 10 hours as it may take on average 16 hours for some people.
+
+Because i am forgetful. The command used to run the surm script is
+
+sbatch <filename>
+squeue -u ppham4 is to look at your job
+squeue -p bgmp is to look at everyones job
+
+With an index cut off of 35 and no read cut off we get the following
+Total Index Hopping = 352378
+Total Matched = 239750646
+Total Number Of Reads= 363246735
+Unknown	123143711
+
+I will need to use pigz in order to zip the files. The files are printed out as standard and are taking up a ton of space. 
+
+############################################################################################################################################
+8/8
+You are going to need to create an 
+
+srun --account=bgmp --partition=bgmp --nodes=1 --ntasks-per-node=20 --time=2:00:00 --cpus-per-task=1 --pty bash
+
+change the number of cores you have so you can use it quicker
+
+now we can run it and use $pigz <filename> & 
+    where our filename is *.fq and the '&' symbol allows you to keep your terminal
+
+This will now zip up all the files and reduce your total space usage. 
+############################################################################################################################################
+<<files>>
+
+The python script is called     demultiplexing.py and is located in /projects/bgmp/ppham4/bioinfo/Bi622/Demultiplex/Assignment-the-third
+The slurm scrip is called       demultiplex.sh and is located in /projects/bgmp/ppham4/bioinfo/Bi622/Demultiplex/Assignment-the-third
+
+the indexes are located in /projects/bgmp/shared/2017_sequencing/
+All the outputs are in the same location where the python and slurm scripts are located
+
+
