@@ -1,3 +1,4 @@
+```
 Input file 1 = /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz
 Input file 2 = /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz
 Input file 3 = /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz
@@ -587,3 +588,4 @@ GATCTTGC+TCGACAAG	19	5.230604481551637e-06%
 TCGACAAG+CACTTCAC	14	3.854129617985416e-06%
 Total Index Hopping = 352378
 Total Matched = 239750646
+```
